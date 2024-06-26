@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
+class ViewController: UIViewController, WKUIDelegate {
 
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var webView: WKWebView!
