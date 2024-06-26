@@ -26,5 +26,9 @@
 		<string>http</string>
 		<string>https</string>
 	</array>
+	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+	<key>UIStateRestorationDisabled</key>
+	<true/>
 </dict>
 </plist>
