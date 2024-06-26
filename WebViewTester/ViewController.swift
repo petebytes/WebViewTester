@@ -16,9 +16,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupWebView()
+        urlTextField.delegate = self
     }
     
     func setupWebView() {
+        let configuration = WKWebViewConfiguration()
+        configuration.websiteDataStore = WKWebsiteDataStore.nonPersistent()
+        
+        if webView == nil {
+            webView = WKWebView(frame: view.bounds, configuration: configuration)
+            webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            view.insertSubview(webView, at: 0)
+        }
+        
         webView.navigationDelegate = self
         webView.uiDelegate = self
         
@@ -76,4 +86,12 @@ extension ViewController: WKNavigationDelegate {
 // MARK: - WKUIDelegate
 extension ViewController: WKUIDelegate {
     // Implement any necessary WKUIDelegate methods here
+}
+// MARK: - UITextFieldDelegate
+extension ViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        loadURL(in: .sameTab)
+        return true
+    }
 }
