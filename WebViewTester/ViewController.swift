@@ -23,6 +23,14 @@ class ViewController: UIViewController {
         let configuration = WKWebViewConfiguration()
         configuration.websiteDataStore = WKWebsiteDataStore.nonPersistent()
         
+        // Add content controller to handle JavaScript messages
+        let contentController = WKUserContentController()
+        configuration.userContentController = contentController
+        
+        // Disable text input to potentially avoid BETextInput warning
+        let script = WKUserScript(source: "document.body.style.webkitUserSelect='none';", injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        contentController.addUserScript(script)
+        
         if webView == nil {
             webView = WKWebView(frame: view.bounds, configuration: configuration)
             webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -31,6 +39,9 @@ class ViewController: UIViewController {
         
         webView.navigationDelegate = self
         webView.uiDelegate = self
+        
+        // Disable zoom to potentially avoid some layout issues
+        webView.scrollView.bouncesZoom = false
         
         // Load a default page
         if let url = URL(string: "https://www.example.com") {
@@ -80,6 +91,14 @@ extension ViewController: WKNavigationDelegate {
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
         print("WebView failed to load: \(error.localizedDescription)")
+    }
+    
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        print("WebView failed provisional navigation: \(error.localizedDescription)")
+        if (error as NSError).code == NSURLErrorNotConnectedToInternet {
+            // Handle no internet connection error
+            print("No internet connection")
+        }
     }
 }
 
