@@ -11,7 +11,7 @@ import WebKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var urlTextField: UITextField!
-    @IBOutlet var webView: WKWebView!
+    @IBOutlet weak var webView: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +20,12 @@ class ViewController: UIViewController {
     }
     
     func setupWebView() {
-        let configuration = WKWebViewConfiguration()
+        guard let webView = webView else {
+            print("WebView is not connected in Interface Builder")
+            return
+        }
+        
+        let configuration = webView.configuration
         configuration.websiteDataStore = WKWebsiteDataStore.nonPersistent()
         
         // Add content controller to handle JavaScript messages
@@ -30,12 +35,6 @@ class ViewController: UIViewController {
         // Disable text input to potentially avoid BETextInput warning
         let script = WKUserScript(source: "document.body.style.webkitUserSelect='none';", injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         contentController.addUserScript(script)
-        
-        if webView == nil {
-            webView = WKWebView(frame: view.bounds, configuration: configuration)
-            webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            view.insertSubview(webView, at: 0)
-        }
         
         webView.navigationDelegate = self
         webView.uiDelegate = self
