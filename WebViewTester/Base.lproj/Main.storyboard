@@ -12,17 +12,17 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <tabBarController id="BYZ-38-t0r" customClass="TabBarController" customModule="WebViewTester" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" id="8bC-Xf-vdC">
+                    <tabBar key="tabBar" id="tab-bar-1">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </tabBar>
                     <viewControllers>
-                        <viewController id="fgd-fN-cxe" customClass="ViewController" customModule="WebViewTester" customModuleProvider="target" sceneMemberID="viewController">
-                            <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <viewController id="view-controller-1" customClass="ViewController" customModule="WebViewTester" customModuleProvider="target" sceneMemberID="viewController">
+                            <view key="view" contentMode="scaleToFill" id="view-1">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fgd-fN-cxe">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="url-text-field">
                                         <rect key="frame" x="20" y="59" width="353" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
@@ -35,7 +35,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Same Tab"/>
                                                 <connections>
-                                                    <action selector="openInSameTab:" destination="fgd-fN-cxe" eventType="touchUpInside" id="Uxc-Oa-Ydh1"/>
+                                                    <action selector="openInSameTab:" destination="view-controller-1" eventType="touchUpInside" id="Uxc-Oa-Ydh1"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zcg-Ob-Ydh">
@@ -43,7 +43,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="New Tab"/>
                                                 <connections>
-                                                    <action selector="openInNewTab:" destination="fgd-fN-cxe" eventType="touchUpInside" id="Uxc-Ob-Ydh1"/>
+                                                    <action selector="openInNewTab:" destination="view-controller-1" eventType="touchUpInside" id="Uxc-Ob-Ydh1"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zcg-Oc-Ydh">
@@ -51,7 +51,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="External"/>
                                                 <connections>
-                                                    <action selector="openInExternalBrowser:" destination="fgd-fN-cxe" eventType="touchUpInside" id="Uxc-Oc-Ydh1"/>
+                                                    <action selector="openInExternalBrowser:" destination="view-controller-1" eventType="touchUpInside" id="Uxc-Oc-Ydh1"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -81,7 +81,7 @@
                                 </constraints>
                             </view>
                             <connections>
-                                <outlet property="urlTextField" destination="fgd-fN-cxe" id="Uxc-Oe-Ydh"/>
+                                <outlet property="urlTextField" destination="url-text-field" id="Uxc-Oe-Ydh"/>
                                 <outlet property="webView" destination="Uxc-Od-Ydh" id="Uxc-Of-Ydh"/>
                             </connections>
                         </viewController>
