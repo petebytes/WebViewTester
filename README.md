@@ -33,11 +33,31 @@ WebViewTester is an iOS application that demonstrates different ways of opening 
 4. Enter a valid URL in the text field (e.g., https://www.example.com).
 5. Tap one of the buttons to open the URL using the selected method.
 
+## How Web Page Tests are Launched
+
+1. Same Tab:
+   - When you tap the "Same Tab" button, the app uses the current WebView to load the URL.
+   - The content replaces whatever was previously displayed in the main WebView.
+   - This is handled by the `openInSameTab(_:)` method in the ViewController.
+
+2. New Tab:
+   - Tapping the "New Tab" button creates a new WebView and loads the URL into it.
+   - A new tab is added to the TabBarController, and the new WebView is displayed in this tab.
+   - This functionality is implemented in the `openInNewTab(_:)` method of the ViewController and the `addNewTab(with:)` method of the TabBarController.
+
+3. External Browser:
+   - The "External" button opens the URL in the device's default web browser.
+   - This is done using UIApplication.shared.open(url, options:, completionHandler:).
+   - The `openInExternalBrowser(_:)` method in the ViewController handles this action.
+
+Each of these methods first validates the URL entered by the user before attempting to load it.
+
 ## Notes
 
-- The "Same Tab" and "New Tab" options will display the web content within the app.
-- The "External" option will switch to the device's default browser app.
+- The "Same Tab" and "New Tab" options display the web content within the app using WKWebView.
+- The "External" option switches to the device's default browser app.
 - Make sure to enter complete URLs, including the "http://" or "https://" prefix.
+- The app uses a non-persistent WKWebsiteDataStore to avoid storing browsing data between sessions.
 
 ## Troubleshooting
 
