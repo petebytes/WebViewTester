@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
 
     @IBOutlet weak var urlTextField: UITextField!
     @IBOutlet weak var webView: WKWebView!
@@ -19,10 +19,13 @@ class ViewController: UIViewController {
     }
     
     func setupWebView() {
-        let webConfiguration = WKWebViewConfiguration()
-        webView = WKWebView(frame: view.bounds, configuration: webConfiguration)
-        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(webView)
+        webView.navigationDelegate = self
+        webView.uiDelegate = self
+        
+        // Load a default page
+        if let url = URL(string: "https://www.example.com") {
+            webView.load(URLRequest(url: url))
+        }
     }
     
     @IBAction func openInSameTab(_ sender: Any) {
@@ -58,3 +61,19 @@ class ViewController: UIViewController {
     }
 }
 
+
+// MARK: - WKNavigationDelegate
+extension ViewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("WebView finished loading")
+    }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        print("WebView failed to load: \(error.localizedDescription)")
+    }
+}
+
+// MARK: - WKUIDelegate
+extension ViewController: WKUIDelegate {
+    // Implement any necessary WKUIDelegate methods here
+}
