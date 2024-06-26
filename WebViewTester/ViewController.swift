@@ -43,10 +43,37 @@ class ViewController: UIViewController {
         // Disable zoom to potentially avoid some layout issues
         webView.scrollView.bouncesZoom = false
         
-        // Load a default page
-        if let url = URL(string: "https://www.example.com") {
-            webView.load(URLRequest(url: url))
-        }
+        // Load the application's info page
+        let htmlString = """
+        <html>
+        <head>
+            <meta name='viewport' content='width=device-width, initial-scale=1'>
+            <style>
+                body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; padding: 20px; line-height: 1.6; }
+                h1 { color: #007AFF; }
+            </style>
+        </head>
+        <body>
+            <h1>WebViewTester</h1>
+            <p>WebViewTester is an iOS application that demonstrates different ways of opening web content within the app and in external browsers.</p>
+            <h2>Features:</h2>
+            <ul>
+                <li>Open URLs in the same tab within the app</li>
+                <li>Open URLs in a new tab within the app</li>
+                <li>Open URLs in an external browser</li>
+            </ul>
+            <h2>Tech Stack:</h2>
+            <ul>
+                <li>iOS 14.0+</li>
+                <li>Swift 5.0</li>
+                <li>UIKit</li>
+                <li>WebKit</li>
+            </ul>
+            <p>Enter a URL in the text field above and try out the different loading options!</p>
+        </body>
+        </html>
+        """
+        webView.loadHTMLString(htmlString, baseURL: nil)
     }
     
     @IBAction func openInSameTab(_ sender: Any) {
