@@ -29,7 +29,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Same Tab"/>
                                         <connections>
-                                            <action selector="openInSameTab:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Uxc-Oa-Ydh"/>
+                                            <action selector="openInSameTab:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Uxc-Oa-Ydh1"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zcg-Ob-Ydh">
@@ -37,7 +37,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="New Tab"/>
                                         <connections>
-                                            <action selector="openInNewTab:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Uxc-Ob-Ydh"/>
+                                            <action selector="openInNewTab:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Uxc-Ob-Ydh1"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zcg-Oc-Ydh">
@@ -45,7 +45,7 @@
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="External"/>
                                         <connections>
-                                            <action selector="openInExternalBrowser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Uxc-Oc-Ydh"/>
+                                            <action selector="openInExternalBrowser:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Uxc-Oc-Ydh1"/>
                                         </connections>
                                     </button>
                                 </subviews>
