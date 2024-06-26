@@ -11,7 +11,7 @@ import WebKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var urlTextField: UITextField!
-    @IBOutlet weak var webView: WKWebView!
+    @IBOutlet var webView: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
