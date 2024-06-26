@@ -81,7 +81,21 @@ class ViewController: UIViewController {
     }
     
     @IBAction func openInNewTab(_ sender: Any) {
-        loadURL(in: .newTab)
+        guard let urlString = urlTextField.text, let url = URL(string: urlString) else {
+            print("Invalid URL")
+            return
+        }
+        
+        let newWebView = WKWebView(frame: view.bounds, configuration: webView.configuration)
+        newWebView.navigationDelegate = self
+        newWebView.uiDelegate = self
+        newWebView.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 30.0))
+        
+        let newTabViewController = UIViewController()
+        newTabViewController.view = newWebView
+        newTabViewController.tabBarItem = UITabBarItem(title: "Tab \(tabBarController?.viewControllers?.count ?? 1 + 1)", image: nil, selectedImage: nil)
+        
+        tabBarController?.viewControllers?.append(newTabViewController)
     }
     
     @IBAction func openInExternalBrowser(_ sender: Any) {
