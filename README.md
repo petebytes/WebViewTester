@@ -37,20 +37,37 @@ WebViewTester is an iOS application that demonstrates different ways of opening 
 
 1. Same Tab:
    - When you tap the "Same Tab" button, the app uses the current WebView to load the URL.
-   - The content replaces whatever was previously displayed in the main WebView.
    - This is handled by the `openInSameTab(_:)` method in the ViewController.
+   - Technical details:
+     - The method calls `loadURL(in: .sameTab)`.
+     - Inside `loadURL(in:)`, it creates a `URLRequest` with the entered URL.
+     - It then calls `webView.load(URLRequest(url: url))` to load the content in the existing WebView.
+     - The WKWebView handles the loading process, including any necessary network requests.
 
 2. New Tab:
    - Tapping the "New Tab" button creates a new WebView and loads the URL into it.
-   - A new tab is added to the TabBarController, and the new WebView is displayed in this tab.
-   - This functionality is implemented in the `openInNewTab(_:)` method of the ViewController and the `addNewTab(with:)` method of the TabBarController.
+   - This functionality is implemented in the `openInNewTab(_:)` method of the ViewController.
+   - Technical details:
+     - A new `WKWebView` is created with the same configuration as the main WebView.
+     - A new `UIViewController` is created to host this WebView.
+     - The new ViewController is given a tab bar item with an incremented number.
+     - The new ViewController is added to the `TabBarController`'s `viewControllers` array.
+     - The URL is loaded into the new WebView using `newWebView.load(URLRequest(url: url, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 30.0))`.
 
 3. External Browser:
    - The "External" button opens the URL in the device's default web browser.
-   - This is done using UIApplication.shared.open(url, options:, completionHandler:).
-   - The `openInExternalBrowser(_:)` method in the ViewController handles this action.
+   - This is handled by the `openInExternalBrowser(_:)` method in the ViewController.
+   - Technical details:
+     - The method calls `loadURL(in: .externalBrowser)`.
+     - Inside `loadURL(in:)`, it uses `UIApplication.shared.open(url, options: [:], completionHandler: nil)`.
+     - This iOS API call hands off the URL to the system, which then opens it in the user's default browser app.
+     - The app's Info.plist file includes necessary URL schemes (http, https) in the `LSApplicationQueriesSchemes` array to allow this functionality.
 
-Each of these methods first validates the URL entered by the user before attempting to load it.
+Each of these methods first validates the URL entered by the user before attempting to load it. The URL validation is done by attempting to create a `URL` object from the entered string. If this fails, the app prints "Invalid URL" to the console.
+
+All web content within the app is loaded using a `WKWebView`, which is configured with a non-persistent `WKWebsiteDataStore` to avoid storing browsing data between sessions. The `WKWebView` is set up in the `setupWebView()` method, which also disables text selection and zoom to avoid potential layout issues.
+
+The app uses `WKNavigationDelegate` and `WKUIDelegate` to handle navigation events and user interface actions in the WebView. This allows for custom handling of page load successes, failures, and other navigation-related events.
 
 ## Notes
 
